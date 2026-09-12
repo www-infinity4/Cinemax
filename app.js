@@ -10,7 +10,8 @@
     enter: $("enterButton"), stationCard: $("stationCard"), cardLabel: $("stationCardLabel"),
     cardTitle: $("stationCardTitle"), cardCountdown: $("stationCardCountdown"), startOver: $("startOverButton"),
     rewind: $("rewindButton"), live: $("liveButton"), position: $("positionLabel"), remaining: $("remainingLabel"),
-    progress: $("progressBar"), next: $("nextCards"), guide: $("guideRows"), guideDate: $("guideDate")
+    progress: $("progressBar"), next: $("nextCards"), guide: $("guideRows"), guideDate: $("guideDate"),
+    playPause: $("playPauseButton")
   };
 
   let player = null;
@@ -187,11 +188,29 @@
     tick();
   }
 
+  function togglePlayPause() {
+    if (!playerReady) return;
+    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+      player.pauseVideo();
+      els.playPause.textContent = "Play";
+      return;
+    }
+    if (mode === "live") {
+      const live = engine.resolve(Date.now(), engine.createDaySchedule(Date.now(), catalog), commercials);
+      if (live.segment.videoId === loadedMovieVideoId) player.seekTo(live.mediaSeconds, true);
+    }
+    player.playVideo();
+    els.playPause.textContent = "Pause";
+  }
+
   window.onYouTubeIframeAPIReady = function () {
     player = new YT.Player("player", {
-      width:"100%", height:"100%", playerVars:{playsinline:1,controls:1,enablejsapi:1,origin:location.origin,widget_referrer:location.href},
+      width:"100%", height:"100%", playerVars:{playsinline:1,controls:0,disablekb:1,enablejsapi:1,origin:location.origin,widget_referrer:location.href},
       events:{
         onReady:() => { playerReady=true; tick(); },
+        onStateChange:event => {
+          els.playPause.textContent = event.data === YT.PlayerState.PLAYING ? "Pause" : "Play";
+        },
         onError:() => {
           if (loadedMovieVideoId) failedMovieVideoIds.add(loadedMovieVideoId);
           scheduleKey = "";
@@ -204,6 +223,7 @@
   };
 
   els.enter.addEventListener("click", enterStation);
+  els.playPause.addEventListener("click", togglePlayPause);
   els.startOver.addEventListener("click", startOver);
   els.rewind.addEventListener("click", rewind);
   els.live.addEventListener("click", joinLive);
