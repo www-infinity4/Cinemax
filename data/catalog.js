@@ -1,22 +1,22 @@
-// Playback policy: R-rated and age-restricted movie entries are excluded from this channel rotation.
-// Cinemax is 1990 onward with an action/crime/thriller/sci-fi identity.
-// Sources were checked for full-length runtimes and current YouTube availability.
+// Cinemax resilient catalog.
+// Paid YouTube Movies/DRM listings are excluded because protected storefront IDs
+// are not dependable third-party embeds. Keep the 1990+ action/adventure identity
+// while preferring ordinary full-length uploads that can play inside the station.
 window.HERMIT_CATALOG = [
-  { id:"MAX-001", title:"Sneakers", year:1992, collection:"Tech Caper", runtimeSeconds:7516, videoId:"Qy9XYQBBIJ4", source:"YouTube Movies", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-002", title:"Stargate", year:1994, collection:"Science-Fiction Adventure", runtimeSeconds:7268, videoId:"lsuY5dYxOCs", source:"YouTube Movies", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-003", title:"Crouching Tiger, Hidden Dragon", year:2000, collection:"Martial-Arts Epic", runtimeSeconds:7208, videoId:"SAGdBlJrMSA", source:"YouTube Movies", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-004", title:"Clueless", year:1995, collection:"Modern Comedy Classic", runtimeSeconds:5834, videoId:"fajG1C0xj9c", source:"YouTube Movies", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-005", title:"The Longest Yard", year:2005, collection:"Sports Action Comedy", runtimeSeconds:6808, videoId:"uGJv_zSRiR0", source:"YouTube Movies", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-011", title:"The Fog", year:2005, collection:"Supernatural After Dark", runtimeSeconds:5995, videoId:"J2UYk9HPz28", source:"YouTube Movies", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-012", title:"Survivor", year:2015, collection:"Conspiracy Action", runtimeSeconds:5799, videoId:"fzfMsnqD-yM", source:"YouTube Movies", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-001", title:"Black Fox", year:1995, collection:"Western Action", runtimeSeconds:5520, videoId:"GI2TFFWrBlc", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-002", title:"Chairman of the Board", year:1998, collection:"Late-Night Comedy", runtimeSeconds:5735, videoId:"jse-_ROi4sI", source:"Ordinary full-length YouTube upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-003", title:"Moving McAllister", year:2007, collection:"Road Adventure Comedy", runtimeSeconds:5340, videoId:"mVZOMXWsExs", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-004", title:"Khumba", year:2013, collection:"Adventure Feature", runtimeSeconds:5100, videoId:"tf7sVfOjWYU", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-005", title:"Runs in the Family", year:2023, collection:"Adventure Comedy", runtimeSeconds:6300, videoId:"AuwUwN1JVec", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true }
 ].map(movie => ({ ...movie, posterUrl:"" }));
 
 window.INFINITY_CHANNEL = {
   id:"Cinemax",
   era:"1990-2026",
   minimumYear:1990,
-  genres:["action", "crime", "thriller", "science fiction", "adventure"],
-  schedulePolicy:"No title or YouTube video ID may air on another Infinity channel on the same station date."
+  genres:["action", "adventure", "thriller", "science fiction", "comedy"],
+  sourcePolicy:"No YouTube Movies DRM IDs, age-restricted videos, trailers, promos or short clips.",
+  schedulePolicy:"Only ordinary full-length uploads may enter the live rotation."
 };
 
 window.HERMIT_COMMERCIALS = [
