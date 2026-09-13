@@ -6,8 +6,10 @@ window.HERMIT_CATALOG = [
   { id:"MAX-CLASSIC-001", title:"Saturn 3", year:1980, collection:"Sci-Fi Cult Classic", runtimeSeconds:5231, videoId:"wgBnLO4Pnb0", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
   { id:"MAX-CLASSIC-002", title:"Call of the Wild", year:1994, collection:"Classic Adventure", runtimeSeconds:5400, videoId:"qDd3Wuliw3E", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
   { id:"MAX-CLASSIC-003", title:"Black Fox", year:1995, collection:"Western Action", runtimeSeconds:5520, videoId:"GI2TFFWrBlc", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
-  { id:"MAX-CLASSIC-004", title:"The Canterville Ghost", year:1996, collection:"Mystery / Gothic", runtimeSeconds:5504, videoId:"oWMJSl_ARSA", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
-  { id:"MAX-CLASSIC-005", title:"Hijack", year:1998, collection:"Action Thriller", runtimeSeconds:5431, videoId:"oOzODYq1i1A", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true }
+  { id:"MAX-CLASSIC-004", title:"The Ranger, The Cook and a Hole in the Sky", year:1995, collection:"Mountain Adventure", runtimeSeconds:5576, videoId:"3sZpzJLmtFs", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
+  { id:"MAX-CLASSIC-005", title:"The Canterville Ghost", year:1996, collection:"Mystery / Gothic", runtimeSeconds:5504, videoId:"oWMJSl_ARSA", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
+  { id:"MAX-CLASSIC-006", title:"Hijack", year:1998, collection:"Action Thriller", runtimeSeconds:5431, videoId:"oOzODYq1i1A", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
+  { id:"MAX-CLASSIC-007", title:"Fever", year:1999, collection:"Dark Mystery Thriller", runtimeSeconds:5318, videoId:"NG4UEfI2qes", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true }
 ].map(movie => ({ ...movie, posterUrl:"", watchUrl:`https://www.youtube.com/watch?v=${movie.videoId}` }));
 
 window.INFINITY_CHANNEL = {
