@@ -1,22 +1,22 @@
-// Cinemax resilient catalog.
-// Paid YouTube Movies/DRM listings are excluded because protected storefront IDs
-// are not dependable third-party embeds. Keep the 1990+ action/adventure identity
-// while preferring ordinary full-length uploads that can play inside the station.
+// Cinemax classic after-dark catalog.
+// Keep this rotation separate from Showtime. Every scheduled title below is a
+// full-length upload from a verified/licensed distributor channel on YouTube.
+// Do not schedule trailers, clips, YouTube Movies storefront/DRM IDs or random reposts.
 window.HERMIT_CATALOG = [
-  { id:"MAX-SAFE-001", title:"Black Fox", year:1995, collection:"Western Action", runtimeSeconds:5520, videoId:"GI2TFFWrBlc", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-SAFE-002", title:"Chairman of the Board", year:1998, collection:"Late-Night Comedy", runtimeSeconds:5735, videoId:"jse-_ROi4sI", source:"Ordinary full-length YouTube upload", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-SAFE-003", title:"Moving McAllister", year:2007, collection:"Road Adventure Comedy", runtimeSeconds:5340, videoId:"mVZOMXWsExs", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-SAFE-004", title:"Khumba", year:2013, collection:"Adventure Feature", runtimeSeconds:5100, videoId:"tf7sVfOjWYU", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
-  { id:"MAX-SAFE-005", title:"Runs in the Family", year:2023, collection:"Adventure Comedy", runtimeSeconds:6300, videoId:"AuwUwN1JVec", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true }
-].map(movie => ({ ...movie, posterUrl:"" }));
+  { id:"MAX-CLASSIC-001", title:"Saturn 3", year:1980, collection:"Sci-Fi Cult Classic", runtimeSeconds:5231, videoId:"wgBnLO4Pnb0", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
+  { id:"MAX-CLASSIC-002", title:"Call of the Wild", year:1994, collection:"Classic Adventure", runtimeSeconds:5400, videoId:"qDd3Wuliw3E", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
+  { id:"MAX-CLASSIC-003", title:"Black Fox", year:1995, collection:"Western Action", runtimeSeconds:5520, videoId:"GI2TFFWrBlc", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
+  { id:"MAX-CLASSIC-004", title:"The Canterville Ghost", year:1996, collection:"Mystery / Gothic", runtimeSeconds:5504, videoId:"oWMJSl_ARSA", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true },
+  { id:"MAX-CLASSIC-005", title:"Hijack", year:1998, collection:"Action Thriller", runtimeSeconds:5431, videoId:"oOzODYq1i1A", source:"Popcornflix", sourceClass:"verified distributor", networkChannel:"Cinemax", contentClass:"Movie", cleared:true }
+].map(movie => ({ ...movie, posterUrl:"", watchUrl:`https://www.youtube.com/watch?v=${movie.videoId}` }));
 
 window.INFINITY_CHANNEL = {
   id:"Cinemax",
-  era:"1990-2026",
-  minimumYear:1990,
-  genres:["action", "adventure", "thriller", "science fiction", "comedy"],
-  sourcePolicy:"No YouTube Movies DRM IDs, age-restricted videos, trailers, promos or short clips.",
-  schedulePolicy:"Only ordinary full-length uploads may enter the live rotation."
+  era:"1980s-1990s classic after-dark rotation",
+  minimumYear:1980,
+  genres:["action", "adventure", "thriller", "science fiction", "mystery", "western"],
+  sourcePolicy:"Verified/licensed distributor full-length uploads only; no DRM storefront IDs, trailers, promos or random reposts.",
+  schedulePolicy:"Cinemax has its own catalog and does not duplicate Showtime's scheduled movies."
 };
 
 window.HERMIT_COMMERCIALS = [
@@ -24,11 +24,3 @@ window.HERMIT_COMMERCIALS = [
   { id:"AD-002", title:"Tonight on Cinemax", durationSeconds:60, videoId:"", cleared:true },
   { id:"AD-003", title:"Cinemax station break", durationSeconds:60, videoId:"", cleared:true }
 ];
-
-(function syncInfinityChannels(){
-  if (document.querySelector('script[data-infinity-channels]')) return;
-  const script = document.createElement('script');
-  script.src = 'https://www-infinity4.github.io/TNT/channels.js';
-  script.dataset.infinityChannels = '1';
-  document.head.appendChild(script);
-})();
