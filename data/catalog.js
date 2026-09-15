@@ -1,24 +1,34 @@
-// Unique seed bucket 4/8 for Cinemax.
-// Control Phi's movie source farm expands this channel toward 96 distinct,
-// profile-matched full movies. The seed IDs are never shared with another
-// movie-channel seed catalog.
-(function(){
-  "use strict";
+// Cinemax resilient catalog.
+// Paid YouTube Movies/DRM listings are excluded because protected storefront IDs
+// are not dependable third-party embeds. Keep the 1990+ action/adventure identity
+// while preferring ordinary full-length uploads that can play inside the station.
+window.HERMIT_CATALOG = [
+  { id:"MAX-SAFE-001", title:"Black Fox", year:1995, collection:"Western Action", runtimeSeconds:5520, videoId:"GI2TFFWrBlc", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-002", title:"Chairman of the Board", year:1998, collection:"Late-Night Comedy", runtimeSeconds:5735, videoId:"jse-_ROi4sI", source:"Ordinary full-length YouTube upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-003", title:"Moving McAllister", year:2007, collection:"Road Adventure Comedy", runtimeSeconds:5340, videoId:"mVZOMXWsExs", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-004", title:"Khumba", year:2013, collection:"Adventure Feature", runtimeSeconds:5100, videoId:"tf7sVfOjWYU", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true },
+  { id:"MAX-SAFE-005", title:"Runs in the Family", year:2023, collection:"Adventure Comedy", runtimeSeconds:6300, videoId:"AuwUwN1JVec", source:"Established full-length upload", networkChannel:"Cinemax", cleared:true }
+].map(movie => ({ ...movie, posterUrl:"" }));
 
-  const rows = [
-    ["Accidental Family",5672,"XH63ZMpgsAk","Movie Central"],
-    ["Cleaver Family Reunion",5445,"r7urqvC_avI","Movie Central"],
-    ["The Little Mermaid",5887,"D7UeODAj7Sc","Family Central"],
-    ["The Jungle Bunch",5840,"ginVeOgYhF0","Shout! Studios"],
-    ["Saving Santaland",5450,"d-EIS1Uik8M","Family Central"],
-    ["Mum Said",5577,"O-9hwCESRAA","EncourageTV"],
-    ["Hee Haw Farm",3949,"EwjctUn1Sas","EncourageTV"],
-    ["A Gift Horse",4970,"AwyNQenGeBM","Movie Central"],
-    ["Snowtime!",4933,"zwdXNakjztU","Shout! Studios"],
-    ["Miracle at Sage Creek",5016,"gYp_hRYT7dw","FilmRise Movies"]
-  ];
+window.INFINITY_CHANNEL = {
+  id:"CINEMAX",
+  era:"1990-2026",
+  minimumYear:1990,
+  genres:["action", "adventure", "thriller", "science fiction", "comedy"],
+  sourcePolicy:"No YouTube Movies DRM IDs, age-restricted videos, trailers, promos or short clips.",
+  schedulePolicy:"Only ordinary full-length uploads may enter the live rotation."
+};
 
-  window.HERMIT_CATALOG=rows.map(function(row,index){return{id:"CINEMAX-SEED-"+String(index+1).padStart(3,"0"),title:row[0],year:null,collection:"Sci-Fi / Action Seed",runtimeSeconds:row[1],videoId:row[2],source:row[3],networkChannel:"Cinemax",contentClass:"Seed Feature",rating:"Unrated",cleared:true,posterUrl:""};});
-  window.INFINITY_CHANNEL={id:"CINEMAX",sourcePolicy:"Unique static seed bucket 4/8. Runtime catalog expansion comes from Cinemax's own Control Phi source profile.",schedulePolicy:"Seven-day no-repeat scheduler. Missing inventory stays empty until unique sources are harvested; it never wraps the seed list."};
-  window.HERMIT_COMMERCIALS=[{id:"AD-001",title:"Cinemax intermission",durationSeconds:60,videoId:"",cleared:true}];
+window.HERMIT_COMMERCIALS = [
+  { id:"AD-001", title:"Cinemax intermission", durationSeconds:60, videoId:"", cleared:true },
+  { id:"AD-002", title:"Tonight on Cinemax", durationSeconds:60, videoId:"", cleared:true },
+  { id:"AD-003", title:"Cinemax station break", durationSeconds:60, videoId:"", cleared:true }
+];
+
+(function syncInfinityChannels(){
+  if (document.querySelector('script[data-infinity-channels]')) return;
+  const script = document.createElement('script');
+  script.src = 'https://www-infinity4.github.io/TNT/channels.js?v=20260915-live1';
+  script.dataset.infinityChannels = '1';
+  document.head.appendChild(script);
 })();
