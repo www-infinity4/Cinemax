@@ -110,14 +110,26 @@
   }
 
   let remoteNow = null;
-  addEventListener("infinity:schedule-now", event => {
-    const x = event.detail;
+  let remoteProgramKey = "";
+
+  function getRemoteProgramKey(x) {
     const p = x && x.now;
     const vid = p && p.source && p.source.sourceId;
-    if (!p || !/^[A-Za-z0-9_-]{6,15}$/.test(String(vid || ""))) return;
+    if (!p || !/^[A-Za-z0-9_-]{6,15}$/.test(String(vid || ""))) return "";
+    return "remote:" + String(p.catalogId || p.id || p.startsAt || p.title || "program") + ":" + String(vid);
+  }
+
+  addEventListener("infinity:schedule-now", event => {
+    const x = event.detail;
+    const nextKey = getRemoteProgramKey(x);
+    if (!nextKey) return;
+    const programChanged = nextKey !== remoteProgramKey;
     remoteNow = x;
-    loadedKey = "";
-    if (entered && playerReady) loadRemoteProgram();
+    remoteProgramKey = nextKey;
+    if (programChanged) {
+      loadedKey = "";
+      if (entered && playerReady) loadRemoteProgram();
+    }
   });
 
   function loadRemoteProgram() {
@@ -125,7 +137,7 @@
     const p = remoteNow.now;
     const vid = String(p.source.sourceId);
     const sec = Math.max(0, Number(remoteNow.offsetSeconds || 0));
-    const key = "remote:" + p.catalogId + ":" + vid;
+    const key = remoteProgramKey || getRemoteProgramKey(remoteNow);
     els.stationCard.hidden = true;
     els.title.textContent = p.title;
     document.body.style.setProperty("--program-art", `url("https://i.ytimg.com/vi/${vid}/maxresdefault.jpg")`);
